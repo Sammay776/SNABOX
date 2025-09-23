@@ -1,4 +1,5 @@
 // Define a reusable veriables contants for uploads
+const API_BASE_URL = 'https://snabox.onrender.com';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB limit
 
@@ -56,7 +57,7 @@ async function handleLogin(e) {
     loginMsg.textContent = 'Logging in... please wait.';
 
     try {
-        const res = await fetch('/login', {
+        const res = await fetch(`${API_BASE_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -89,7 +90,7 @@ function handleSignup(e) {
 
     signupMsg.textContent = 'Creating account...';
 
-    fetch('/register', {
+    fetch(`${API_BASE_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -112,7 +113,7 @@ async function handleLogout() {
     storageMsg.textContent = 'Logging you out...';
 
     try {
-        await fetch('/logout', {
+        await fetch(`${API_BASE_URL}/logout`, {
             method: 'POST',
             headers: { Authorization: `Bearer ${token}` }
         });
@@ -160,7 +161,7 @@ async function uploadFile(file) {
     storageMsg.textContent = `Uploading "${file.name}"...`;
 
     try {
-        const res = await fetch('/upload', {
+        const res = await fetch(`${API_BASE_URL}/upload`, {
             method: 'POST',
             headers: { Authorization: `Bearer ${token}` },
             body: formData
@@ -187,7 +188,7 @@ async function fetchFiles() {
     fileListEl.innerHTML = '<li>Loading...</li>';
 
     try {
-        const res = await fetch('/files', {
+        const res = await fetch(`${API_BASE_URL}/files`, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -231,7 +232,7 @@ async function deleteFile(fileId) {
     storageMsg.textContent = 'Deleting...';
 
     try {
-        const res = await fetch(`/files/${fileId}`, {
+        const res = await fetch(`${API_BASE_URL}/files/${fileId}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
         });
