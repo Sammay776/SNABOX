@@ -21,7 +21,7 @@ const limiter = rateLimit({
     message: 'Too many requests, please slow down.'
 })
 
-app.use(cors())
+app.use(cors({ origin: 'https://snabox.vercel.app' }))
 app.use(express.json())
 app.use(limiter)
 
