@@ -1,0 +1,165 @@
+/* General Body & Background Styling */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('background.jpg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+}
+
+/* Main content container */
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.5);
+    /* This creates the frosted glass effect */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* border: 1px solid red; */ /* <-- typical debug style */
+}
+
+.section {
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: #0a5199;
+    text-align: center;
+}
+
+/* General form element styling */
+input, button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.password-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.password-container input[type="password"],
+.password-container input[type="text"] {
+    padding-right: 40px; /* Make space for the toggle icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#login-form input[type="email"],
+#login-form input[type="text"],
+#signup-form input[type="email"],
+#signup-form input[type="text"] {
+    margin-bottom: 15px;
+}
+
+/* Custom styling for the file input button */
+input[type="file"]::file-selector-button {
+    padding: 8px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    background: #3498db;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: #2980b9;
+}
+
+/* Fallback for older browsers */
+input[type="file"]::-ms-browse {
+    padding: 8px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    background: #3498db;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+input[type="file"]::-ms-browse:hover {
+    background: #2980b9;
+}
+
+.drop-area {
+    border: 2px dashed #3498db;
+    padding: 20px;
+    text-align: center;
+    margin: 10px 0;
+    background-color: #ecf0f1;
+    transition: background-color 0.3s;
+}
+
+.drop-area.active {
+    background-color: #dfe6e9;
+}
+
+#file-list {
+    list-style: none;
+    padding: 0;
+}
+
+#file-list li {
+    padding: 10px;
+    background: #f9f9f9;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
