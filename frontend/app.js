@@ -213,7 +213,10 @@ async function fetchFiles() {
                 <span>${file.name}</span>
                 <span>${fsize} KB</span>
                 <span>${fdate}</span>
-                <button data-id="${file.id}" class="delete-btn">Delete</button>
+                <div class="file-actions">
+                    <button data-id="${file.id}" class="download-btn">Download</button>
+                    <button data-id="${file.id}" class="delete-btn">Delete</button>
+                </div>
             `;
             fileListEl.appendChild(li);
         }
@@ -251,6 +254,48 @@ async function deleteFile(fileId) {
     }
 }
 
+// newly added by gemini
+async function downloadFile(fileId) {
+    const token = localStorage.getItem('sessionToken');
+    if (!token) {
+        storageMsg.textContent = 'Session expired. Please log in.';
+        return;
+    }
+
+    storageMsg.textContent = 'Preparing download...';
+
+    try {
+        // 1. Get the signed URL from the backend
+        const res = await fetch(`${API_BASE_URL}/files/download/${fileId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+            throw new Error(result.error || 'Could not get download link');
+        }
+
+        // 2. Trigger the download
+        storageMsg.textContent = 'Downloading...';
+        
+        // Create a temporary link element and click it
+        const link = document.createElement('a');
+        link.href = result.signedUrl;
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        storageMsg.textContent = 'Download started.';
+
+    } catch (err) {
+        console.error('Download error:', err);
+        storageMsg.textContent = `Download failed: ${err.message}`;
+    }
+}
+// editing ended by gemini
+
 // Event listener
 loginForm.addEventListener('submit', handleLogin);
 signupForm.addEventListener('submit', handleSignup);
@@ -283,6 +328,9 @@ fileListEl.addEventListener('click', e => {
     if (e.target.classList.contains('delete-btn')) {
         const id = e.target.dataset.id;
         deleteFile(id);
+    } else if (e.target.classList.contains('download-btn')) {
+        const id = e.target.dataset.id;
+        downloadFile(id);
     }
 });
 

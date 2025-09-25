@@ -186,3 +186,59 @@ This plan outlines the process of implementing a full-stack authentication syste
     *   Update the `cors()` configuration in `index.js` to only allow that URL.
     *   Push the change to GitHub, which will trigger a new backend deployment on Render.
 6.  Final verification of the fully deployed, secure application.
+---
+
+## Project Plan: Add File Download Feature
+
+**Overall Status: Not Started**
+
+**Guiding Principles:**
+- **Security:** The download process will be secure, ensuring users can only download their own files.
+- **Efficiency:** We will let Supabase handle the heavy lifting of the download itself, which is faster and more scalable.
+- **User Experience:** The download will be instantaneous from the user's perspective and the UI will be clean and intuitive.
+- **Code Comments:** All new code will be clearly marked with start and end comments (e.g., `// newly added by gemini` and `// editing ended by gemini`) for easy identification.
+
+---
+
+### Phase 1: Backend - Create the Secure Download Endpoint
+
+**Status: Not Started**
+
+**Goal:** Create a new API endpoint on the backend that can provide a secure, temporary download link for a specific file.
+
+**Tasks:**
+1.  Modify the backend server file (`index.js`).
+2.  Add a new route: `GET /files/download/:id`.
+3.  Protect the route with the existing authentication middleware.
+4.  Implement logic to verify that the requested file belongs to the authenticated user.
+5.  Generate a temporary, secure "signed URL" for the file using Supabase Storage.
+6.  Send the signed URL back to the frontend.
+
+---
+
+### Phase 2: Frontend - Add the Download Button and Logic
+
+**Status: Not Started**
+
+**Goal:** Add the "Download" button to the user interface and write the JavaScript code to make it work.
+
+**Tasks:**
+1.  In `frontend/app.js`, update the file list rendering to include a "Download" button next to the "Delete" button.
+2.  Add a new event listener to handle clicks on the "Download" button.
+3.  Create a new `downloadFile` function that calls the backend to get the secure link.
+4.  Implement the logic within `downloadFile` to trigger an instantaneous browser download for the user.
+
+---
+
+### Phase 3: Styling - Finalize Button Appearance
+
+**Status: Not Started**
+
+**Goal:** Ensure the new button layout and style match the user's request.
+
+**Tasks:**
+1.  Modify `frontend/styles.css` to handle the new button layout.
+2.  Place the "Download" and "Delete" buttons side-by-side, ensuring they fit in the existing space.
+3.  Ensure the "Download" button has the identical style (color, size, font) as the "Delete" button.
+
+---

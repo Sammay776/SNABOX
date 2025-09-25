@@ -163,3 +163,32 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* newly added by gemini */
+.file-actions {
+    display: flex;
+    gap: 8px; /* Adds a small space between the buttons */
+}
+
+#file-list .delete-btn {
+    background-color: #e74c3c; /* A shade of red */
+    width: auto; /* Override the default 100% width */
+    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    font-size: 14px;
+}
+
+#file-list .delete-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+#file-list .download-btn {
+    background-color: #3498db; /* The original blue color */
+    width: auto; /* Override the default 100% width */
+    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    font-size: 14px;
+}
+
+#file-list .download-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+/* editing ended by gemini */
