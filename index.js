@@ -82,24 +82,33 @@ async function requireAuth(req, res, next) {
 
                                     // Auth Routes
 app.post('/register', async (req, res, next) => {
-    const { email, password } = req.body || {}
-    if (!email || !password) {
-        return res.status(400).send({ error: 'Email and password required' })
+    const { email, password, username } = req.body || {};
+    if (!email || !password || !username) {
+        return res.status(400).send({ error: 'Email, password, and username are required' });
     }
 
     try {
-        const { error } = await supabase.auth.signUp({ email, password })
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    username: username
+                }
+            }
+        });
+
         if (error) {
             if (error.message.includes('already registered')) {
-                return res.status(409).send({ error: 'User already exists' })
+                return res.status(409).send({ error: 'User already exists' });
             }
-            throw error
+            throw error;
         }
-        res.status(201).send({ message: 'User created successfully' })
+        res.status(201).send({ message: 'User created successfully' });
     } catch (err) {
-        next(err)
+        next(err);
     }
-})
+});
 
 app.post('/login', async (req, res, next) => {
     const { email, password } = req.body || {}

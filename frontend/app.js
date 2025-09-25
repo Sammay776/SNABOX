@@ -69,9 +69,10 @@ async function handleLogin(e) {
             throw new Error(result.error || 'Invalid credentials');
         }
 
-        // Save tokens
+        // Save tokens and user info
         localStorage.setItem('sessionToken', result.session.access_token || '');
         localStorage.setItem('userEmail', result.session.user?.email || '');
+        localStorage.setItem('userName', result.session.user?.user_metadata?.username || '');
 
         loginForm.reset();
         loginMsg.textContent = 'Login successful 🎉';
@@ -87,13 +88,14 @@ function handleSignup(e) {
     e.preventDefault();
     const email = document.getElementById('signup-email').value.trim();
     const password = document.getElementById('signup-password').value;
+    const username = document.getElementById('signup-user_name').value.trim();
 
     signupMsg.textContent = 'Creating account...';
 
     fetch(`${API_BASE_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password, username })
     })
     .then(res => res.json().then(data => ({ ok: res.ok, data })))
     .then(({ ok, data }) => {
@@ -129,13 +131,10 @@ async function handleLogout() {
 // Checks current auth state and updates UI respectivly
 function checkAuthState() {
     const token = localStorage.getItem('sessionToken');
-    const email = localStorage.getItem('userEmail');
+    const username = localStorage.getItem('userName');
 
-    if (token && email) {
-        // newly added by gemini
-        const username = email.split('@')[0];
+    if (token && username) {
         userNameEl.textContent = username;
-        // editing ended by gemini
         switchView('storage-section');
         fetchFiles();
     } else {
