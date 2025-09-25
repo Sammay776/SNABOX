@@ -132,7 +132,10 @@ function checkAuthState() {
     const email = localStorage.getItem('userEmail');
 
     if (token && email) {
-        userNameEl.textContent = email;
+        // newly added by gemini
+        const username = email.split('@')[0];
+        userNameEl.textContent = username;
+        // editing ended by gemini
         switchView('storage-section');
         fetchFiles();
     } else {
