@@ -222,7 +222,7 @@ app.get('/files/download/:id', requireAuth, async (req, res, next) => {
         const storagePath = `${req.user.id}/${file.name}`
         const { data, error: urlErr } = await req.supabase.storage
             .from('files')
-            .createSignedUrl(storagePath, 60) // URL is valid for 60 seconds
+            .createSignedUrl(storagePath, 60, { download: true }) // URL is valid for 60 seconds
 
         if (urlErr) throw urlErr
 
