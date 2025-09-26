@@ -212,11 +212,12 @@ app.delete('/files/:id', requireAuth, async (req, res, next) => {
     }
 })
 
-// newly added by gemini
+//164
+
 app.get('/files/download/:id', requireAuth, async (req, res, next) => {
     const fileId = req.params.id
     try {
-        // 1. Verify the file exists and belongs to the user
+        // existantial check.
         const { data: file, error: fetchErr } = await req.supabase
             .from('files')
             .select('name')
@@ -227,22 +228,22 @@ app.get('/files/download/:id', requireAuth, async (req, res, next) => {
             return res.status(404).send({ error: 'File not found or you do not have access.' })
         }
 
-        // 2. Generate a signed URL
+        //url for 60 sec generation
         const storagePath = `${req.user.id}/${file.name}`
         const { data, error: urlErr } = await req.supabase.storage
             .from('files')
-            .createSignedUrl(storagePath, 60, { download: true }) // URL is valid for 60 seconds
+            .createSignedUrl(storagePath, 60, { download: true }) 
 
         if (urlErr) throw urlErr
 
-        // 3. Send the URL to the client
+        //Send url
         res.send({ signedUrl: data.signedUrl })
     } catch (err) {
         next(err)
     }
 })
-// editing ended by gemini
 
+// 
 // Static frontend 
 app.use(express.static('frontend'))
 

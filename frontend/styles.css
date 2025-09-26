@@ -18,10 +18,10 @@ body {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.5);
-    /* This creates the frosted glass effect */
+    /* glass effect */
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    /* border: 1px solid red; */ /* <-- typical debug style */
+    /* border: 1px solid red; */ /* <--debug style */
 }
 
 .section {
@@ -77,7 +77,7 @@ button:hover {
 
 .password-container input[type="password"],
 .password-container input[type="text"] {
-    padding-right: 40px; /* Make space for the toggle icon */
+    padding-right: 40px;
 }
 
 .toggle-password {
@@ -96,7 +96,7 @@ button:hover {
     margin-bottom: 15px;
 }
 
-/* Custom styling for the file input button */
+/* Custom file input button */
 input[type="file"]::file-selector-button {
     padding: 8px 15px;
     border: 1px solid rgba(0, 0, 0, 0.4);
@@ -112,7 +112,6 @@ input[type="file"]::file-selector-button:hover {
     background: #2980b9;
 }
 
-/* Fallback for older browsers */
 input[type="file"]::-ms-browse {
     padding: 8px 15px;
     border: 1px solid rgba(0, 0, 0, 0.4);
@@ -164,31 +163,30 @@ a:hover {
     text-decoration: underline;
 }
 
-/* newly added by gemini */
 .file-actions {
     display: flex;
-    gap: 8px; /* Adds a small space between the buttons */
+    gap: 8px; 
 }
 
 #file-list .delete-btn {
-    background-color: #e74c3c; /* A shade of red */
-    width: auto; /* Override the default 100% width */
-    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    background-color: #e74c3c;
+    width: auto; 
+    padding: 5px 10px; 
     font-size: 14px;
 }
 
 #file-list .delete-btn:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b; 
 }
 
 #file-list .download-btn {
-    background-color: #3498db; /* The original blue color */
-    width: auto; /* Override the default 100% width */
-    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    background-color: #3498db;
+    width: auto; 
+    padding: 5px 10px; 
     font-size: 14px;
 }
 
 #file-list .download-btn:hover {
-    background-color: #2980b9; /* Darker blue on hover */
+    background-color: #2980b9; 
 }
-/* editing ended by gemini */
+

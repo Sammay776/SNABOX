@@ -69,7 +69,7 @@ async function handleLogin(e) {
             throw new Error(result.error || 'Invalid credentials');
         }
 
-        // Save tokens and user info
+        // Save tokens & user info
         localStorage.setItem('sessionToken', result.session.access_token || '');
         localStorage.setItem('userEmail', result.session.user?.email || '');
         localStorage.setItem('userName', result.session.user?.user_metadata?.username || '');
@@ -255,19 +255,19 @@ async function deleteFile(fileId) {
         storageMsg.textContent = `Could not delete: ${err.message}`;
     }
 }
+//
 
-// newly added by gemini
 async function downloadFile(fileId) {
     const token = localStorage.getItem('sessionToken');
     if (!token) {
-        storageMsg.textContent = 'Session expired. Please log in.';
+        storageMsg.textContent = 'Session expired. Please log in again.';
         return;
     }
 
     storageMsg.textContent = 'Preparing download...';
 
     try {
-        // 1. Get the signed URL from the backend
+        // url generte
         const res = await fetch(`${API_BASE_URL}/files/download/${fileId}`, {
             headers: { Authorization: `Bearer ${token}` }
         });
@@ -278,10 +278,9 @@ async function downloadFile(fileId) {
             throw new Error(result.error || 'Could not get download link');
         }
 
-        // 2. Trigger the download
         storageMsg.textContent = 'Downloading...';
         
-        // Create a temporary link element and click it
+        // temp livk
         const link = document.createElement('a');
         link.href = result.signedUrl;
         
@@ -296,9 +295,10 @@ async function downloadFile(fileId) {
         storageMsg.textContent = `Download failed: ${err.message}`;
     }
 }
-// editing ended by gemini
 
 // Event listener
+//
+
 loginForm.addEventListener('submit', handleLogin);
 signupForm.addEventListener('submit', handleSignup);
 logoutBtn.addEventListener('click', handleLogout);
